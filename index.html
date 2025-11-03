@@ -3,13 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedro Ceballos - Portfolio</title>
+  <title>IX Productions - Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
 <body>
+  <!-- Background Video -->
+  <div class="intro-video-bg">
+    <video id="bg-video" autoplay muted loop playsinline>
+      <source src="assets/videos/reel.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-gradient"></div>
+  </div>
+
   <header>
-    <h1>Pedro Ceballos</h1>
+    <h1>IX Productions</h1>
     <nav>
       <a href="index.html" class="active">Home</a>
       <a href="projects.html">Projects</a>
@@ -18,24 +27,105 @@
     </nav>
   </header>
 
-  <main class="fade-in">
+  <main>
+    <!-- Intro Section -->
     <section class="intro">
       <h2>Welcome!</h2>
-      <p>I'm a 3D Lookdev artist specializing in materials, lighting, and rendering.</p>
+      <p>I'm a 3D Lookdev artist and generalist specializing in materials, lighting, and rendering.</p>
 
-      <video controls class="intro-video">
+      <!-- Foreground Video -->
+      <video autoplay muted loop playsinline class="intro-video">
         <source src="assets/videos/reel.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </section>
+
+    <!-- About Me Section -->
+    <section class="about-me">
+      <style>
+        .about-card {
+          max-width: 900px;
+          margin: 80px auto;
+          padding: 2rem 2.5rem;
+          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+          color: #fff;
+          text-align: left;
+          line-height: 1.6;
+        }
+
+        .about-card h2 {
+          margin-top: 0;
+          margin-bottom: 1rem;
+          color: #c77dff;
+          font-weight: 600;
+          font-size: 2rem;
+          text-shadow: 0 0 8px rgba(200, 100, 255, 0.3);
+        }
+
+        .about-card p {
+          color: #e0e0e0;
+          font-size: 1.1rem;
+          letter-spacing: 0.4px;
+        }
+      </style>
+
+      <div class="about-card">
+        <h2>About Me</h2>
+        <p>
+          I'm IX Productions — a Colombia based Lookdev & Technical Artist passionate about crafting believable materials, 
+          cinematic lighting, and expressive visuals. With 5+ years of freelance experience and 2+ years in 
+          professional roles, I specialize in Look Development, procedural workflows, and shader-based 
+          storytelling. This portfolio showcases my personal and professional work — from recent projects 
+          to creative experiments. Check out my other social media for behind-the-scenes insights, updates, and more.
+        </p>
+      </div>
+
+      <!-- Scroll Arrow Icon (anchored below About Me) -->
+      <img 
+        src="assets/images/arrow.png" 
+        alt="Scroll to Projects" 
+        class="scroll-arrow" 
+        id="scroll-arrow"
+        style="
+          display: block;
+          margin: 40px auto 0 auto;
+          cursor: pointer;
+          width: 50px;
+          height: 50px;
+          opacity: 0.3;
+          transition: transform 0.3s ease;
+        "
+        onclick="window.location.href='projects.html';"
+      />
+    </section>
   </main>
 
-<div id="image-zoom-overlay">
-  <img src="" alt="Zoomed Image">
-</div> 
+  <div id="image-zoom-overlay">
+    <img src="" alt="Zoomed Image">
+  </div> 
 
   <footer>
     <p>© 2025 IX Productions</p>
   </footer>
+
+  <!-- Background Video Visibility Handling -->
+  <script>
+    const bgVideo = document.getElementById("bg-video");
+    if (bgVideo) {
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          bgVideo.style.transition = "opacity 0.8s ease";
+          bgVideo.style.opacity = 0;
+        } else {
+          bgVideo.style.transition = "opacity 0.8s ease";
+          bgVideo.style.opacity = 0.3;
+        }
+      });
+    }
+  </script>
 </body>
 </html>

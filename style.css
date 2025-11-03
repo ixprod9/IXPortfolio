@@ -16,6 +16,36 @@ body {
   flex-direction: column;
   transition: background 1s ease;
   letter-spacing: 0.5px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background Video */
+.intro-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  filter: blur(10px);
+  z-index: -2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.intro-video-bg.hidden {
+  opacity: 0;
+}
+
+/* Gradient overlay on background video */
+.video-gradient {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,10,30,1), rgba(20,10,30,0));
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Header */
@@ -27,6 +57,8 @@ header {
   align-items: center;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
 }
 
 h1 {
@@ -55,6 +87,8 @@ main {
   flex: 1;
   padding: 2em;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Footer */
@@ -64,21 +98,24 @@ footer {
   font-size: 0.9em;
   background: rgba(255, 255, 255, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
 }
 
-/* Video */
+/* Intro Video (foreground) */
 .intro-video {
-  width: 80%;
-  max-width: 720px;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
   margin-top: 1.5em;
   border-radius: 16px;
   box-shadow: 0 0 25px rgba(160, 100, 255, 0.3);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: none;
 }
 
 .intro-video:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 35px rgba(200, 120, 255, 0.5);
+  transform: none;
+  box-shadow: 0 0 25px rgba(160, 100, 255, 0.3);
 }
 
 /* Project Grid */
@@ -118,8 +155,22 @@ footer {
   margin: 0.8em;
   color: #c77dff;
   font-size: 1.4em;
-  text-shadow: 0 0 8px rgba(150, 80, 255, 0.3);
   text-align: center;
+  text-shadow: 0 0 8px rgba(150, 80, 255, 0.3);
+}
+/* Scroll Arrow Icon */
+.scroll-arrow {
+  display: block;       /* make it a block element so margin auto centers it */
+  margin: 40px auto 0 auto;  /* space above and center horizontally */
+  width: 50px;          /* adjust size */
+  height: auto;
+  opacity: 0.3;           /* make it visible */
+  transition: transform 0.3s ease;  /* optional hover effect */
+  cursor: pointer;
+}
+
+.scroll-arrow:hover {
+  transform: translateY(-5px);  /* small bounce on hover */
 }
 
 /* Responsive Layout */
@@ -270,12 +321,10 @@ footer {
 /* --- MOBILE-FRIENDLY STYLES --- */
 @media (max-width: 480px) {
 
-  /* Body padding */
   body {
     padding: 0 1em;
   }
 
-  /* Header: stack vertically */
   header {
     flex-direction: column;
     align-items: flex-start;
@@ -296,7 +345,6 @@ footer {
     font-size: 1.6rem;
   }
 
-  /* Projects: single column */
   .projects {
     grid-template-columns: 1fr;
     gap: 1.5em;
@@ -307,25 +355,21 @@ footer {
     aspect-ratio: auto;
   }
 
-  /* Intro video full width */
   .intro-video {
     width: 100%;
     max-width: 100%;
   }
 
-  /* Footer adjustments */
   footer {
     font-size: 0.8em;
     padding: 0.8em;
   }
 
-  /* Reduce blur/shadows for performance */
   header, .project-card, .modal-content {
     backdrop-filter: blur(6px);
     box-shadow: 0 0 15px rgba(180, 100, 255, 0.2);
   }
 
-  /* Modal content adjustments */
   .modal-content {
     width: 90%;
     max-width: 90%;
@@ -338,7 +382,6 @@ footer {
     right: 10px;
   }
 
-  /* Zoom overlay adjustments */
   #image-zoom-overlay img {
     max-width: 95%;
     max-height: 95%;

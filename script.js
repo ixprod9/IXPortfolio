@@ -298,10 +298,40 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomImg.style.cursor = "grab";
   });
 
-  document.addEventListener("mousemove", e => {
+   document.addEventListener("mousemove", e => {
     if (!isDragging) return;
     translateX = e.clientX - startX;
     translateY = e.clientY - startY;
     zoomImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
   });
+
+  // === Background Video Fade on Tab Visibility ===
+  const bgVideo = document.getElementById("bg-video");
+  if (bgVideo) {
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        bgVideo.style.transition = "opacity 0.8s ease";
+        bgVideo.style.opacity = 0;
+      } else {
+        bgVideo.style.transition = "opacity 0.8s ease";
+        bgVideo.style.opacity = 0.3; // match your background opacity
+      }
+    });
+  }
+
+  // === Scroll Arrow Functionality ===
+  const arrow = document.querySelector(".scroll-arrow");
+  if (arrow) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        arrow.style.opacity = 1;
+      } else {
+        arrow.style.opacity = 0;
+      }
+    });
+
+    arrow.addEventListener("click", () => {
+      window.location.href = "projects.html";
+    });
+  }
 });

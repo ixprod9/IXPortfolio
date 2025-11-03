@@ -1,0 +1,86 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #111;
+  color: #eee;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  background: #222;
+  position: sticky;
+  top: 0;
+}
+
+nav a {
+  margin-left: 1em;
+  color: #bbb;
+  text-decoration: none;
+}
+
+nav a.active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.tab-content {
+  display: none;
+  padding: 2em;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1em;
+}
+
+.project-card {
+  background: #1c1c1c;
+  padding: 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+}
+
+/* Modal */
+#project-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden { display: none; }
+
+.modal-content {
+  background: #222;
+  padding: 2em;
+  border-radius: 10px;
+  max-width: 800px;
+  width: 90%;
+}
+
+.close-btn {
+  float: right;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

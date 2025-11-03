@@ -3,18 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - Pedro Ceballos</title>
+  <title>Contact - IX Productions</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
   <style>
     main {
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 80vh;
+      position: relative;
+      overflow: hidden; /* ensure dvd icon stays within window */
     }
 
     .contact {
       text-align: center;
+      z-index: 1;
+      position: relative;
     }
 
     .contact h2 {
@@ -24,7 +30,7 @@
       text-shadow: 0 0 8px #7a47ff;
     }
 
-    /* Dock for contact links (doesn't affect header) */
+    /* Dock for contact links */
     .contact-dock {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -38,6 +44,8 @@
       align-items: center;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1;
+      position: relative;
     }
 
     .contact-dock:hover {
@@ -72,6 +80,20 @@
       color: #ffffff;
       transform: translateX(4px);
     }
+
+    /* DVD Icon */
+    #dvd-icon {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 128px;
+      height: 128px;
+      background: url('https://cdn.discordapp.com/emojis/1318694929677029587.webp?size=128') no-repeat center/contain;
+      cursor: grab;
+      z-index: 1000;
+      user-select: none;
+    }
+
   </style>
 </head>
 <body>
@@ -111,10 +133,69 @@
         </div>
       </div>
     </section>
+
+    <!-- DVD Icon -->
+    <div id="dvd-icon"></div>
   </main>
 
   <footer>
     <p>© 2025 IX Productions</p>
   </footer>
+
+  <script>
+    const dvd = document.getElementById('dvd-icon');
+    let posX = 50;
+    let posY = 50;
+    let velX = 2;
+    let velY = 2;
+    let dragging = false;
+    let resumeTimeout;
+
+    function animateDVD() {
+      if (!dragging) {
+        const rect = dvd.getBoundingClientRect();
+        const maxX = window.innerWidth - rect.width;
+        const maxY = window.innerHeight - rect.height;
+
+        posX += velX;
+        posY += velY;
+
+        if (posX <= 0 || posX >= maxX) velX *= -1;
+        if (posY <= 0 || posY >= maxY) velY *= -1;
+
+        dvd.style.left = posX + 'px';
+        dvd.style.top = posY + 'px';
+      }
+      requestAnimationFrame(animateDVD);
+    }
+
+    dvd.addEventListener('mousedown', e => {
+      dragging = true;
+      clearTimeout(resumeTimeout);
+      dvd.style.cursor = 'grabbing';
+      const offsetX = e.clientX - dvd.offsetLeft;
+      const offsetY = e.clientY - dvd.offsetTop;
+
+      function onMouseMove(e) {
+        posX = e.clientX - offsetX;
+        posY = e.clientY - offsetY;
+        dvd.style.left = posX + 'px';
+        dvd.style.top = posY + 'px';
+      }
+
+      function onMouseUp() {
+        dragging = false;
+        dvd.style.cursor = 'grab';
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        resumeTimeout = setTimeout(() => { dragging = false; }, 3000);
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+
+    animateDVD();
+  </script>
 </body>
 </html>

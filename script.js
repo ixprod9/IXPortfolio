@@ -203,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // --- Existing code for modal, zoom, background video, scroll arrow ---
   const modal = document.getElementById("project-modal");
   const modalBody = document.getElementById("modal-body");
   const closeBtn = document.querySelector(".close-btn");
@@ -314,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
         bgVideo.style.opacity = 0;
       } else {
         bgVideo.style.transition = "opacity 0.8s ease";
-        bgVideo.style.opacity = 0.3; // match your background opacity
+        bgVideo.style.opacity = 0.3;
       }
     });
   }

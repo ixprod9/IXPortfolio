@@ -3,19 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IX Productions - Portfolio</title>
+  <title>Portfolio - IX Productions </title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
   <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Background Video -->
-  <div class="intro-video-bg">
-    <video id="bg-video" autoplay muted loop playsinline>
-      <source src="assets/videos/reel.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="video-gradient"></div>
-  </div>
 
   <header>
     <h1>IX Productions</h1>
@@ -33,11 +27,28 @@
       <h2>Welcome!</h2>
       <p>I'm a 3D Lookdev artist and generalist specializing in materials, lighting, and rendering.</p>
 
-      <!-- Foreground Video -->
-      <video autoplay muted loop playsinline class="intro-video">
-        <source src="assets/videos/reel.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <!-- Background Vimeo Video -->
+      <div class="intro-video-bg">
+        <iframe
+          src="https://player.vimeo.com/video/1133223115?autoplay=1&muted=1&loop=1&background=1"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          allowfullscreen
+          title="Reel">
+        </iframe>
+        <div class="video-overlay"></div>
+      </div>
+
+      <!-- Foreground Video (normal, clear) -->
+      <div class="intro-video">
+        <iframe 
+          src="https://player.vimeo.com/video/1133223115?autoplay=1&muted=1&loop=1&background=1&controls=0&title=0&byline=0&portrait=0&transparent=0&playsinline=1" 
+          frameborder="0" 
+          allow="autoplay; encrypted-media" 
+          allowfullscreen 
+          title="Reel">
+        </iframe>
+      </div>
     </section>
 
     <!-- About Me Section -->
@@ -49,8 +60,6 @@
           padding: 2rem 2.5rem;
           border-radius: 20px;
           background: rgba(255, 255, 255, 0.08);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
           color: #fff;
           text-align: left;
@@ -71,12 +80,26 @@
           font-size: 1.1rem;
           letter-spacing: 0.4px;
         }
+
+        .scroll-arrow {
+          display: block;
+          margin: 2rem auto 0 auto;
+          width: 50px;
+          height: auto;
+          cursor: pointer;
+          opacity: 0.5;
+          transition: transform 0.3s ease;
+        }
+
+        .scroll-arrow:hover {
+          transform: translateY(-5px);
+        }
       </style>
 
       <div class="about-card">
         <h2>About Me</h2>
         <p>
-          I'm IX Productions — a Colombia based Lookdev & Technical Artist passionate about crafting believable materials, 
+          I'm IX Productions — a Lookdev & Technical Artist passionate about crafting believable materials, 
           cinematic lighting, and expressive visuals. With 5+ years of freelance experience and 2+ years in 
           professional roles, I specialize in Look Development, procedural workflows, and shader-based 
           storytelling. This portfolio showcases my personal and professional work — from recent projects 
@@ -84,23 +107,7 @@
         </p>
       </div>
 
-      <!-- Scroll Arrow Icon (anchored below About Me) -->
-      <img 
-        src="assets/images/arrow.png" 
-        alt="Scroll to Projects" 
-        class="scroll-arrow" 
-        id="scroll-arrow"
-        style="
-          display: block;
-          margin: 40px auto 0 auto;
-          cursor: pointer;
-          width: 50px;
-          height: 50px;
-          opacity: 0.3;
-          transition: transform 0.3s ease;
-        "
-        onclick="window.location.href='projects.html';"
-      />
+      <img src="assets/images/arrow.png" alt="Scroll to Projects" class="scroll-arrow" id="scroll-arrow">
     </section>
   </main>
 
@@ -112,20 +119,12 @@
     <p>© 2025 IX Productions</p>
   </footer>
 
-  <!-- Background Video Visibility Handling -->
   <script>
-    const bgVideo = document.getElementById("bg-video");
-    if (bgVideo) {
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          bgVideo.style.transition = "opacity 0.8s ease";
-          bgVideo.style.opacity = 0;
-        } else {
-          bgVideo.style.transition = "opacity 0.8s ease";
-          bgVideo.style.opacity = 0.3;
-        }
-      });
-    }
+    // Scroll arrow
+    const scrollArrow = document.getElementById("scroll-arrow");
+    scrollArrow.addEventListener("click", () => {
+      window.location.href = "projects.html";
+    });
   </script>
 </body>
 </html>

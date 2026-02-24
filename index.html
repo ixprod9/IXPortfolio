@@ -1,130 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - IX Productions </title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/images/favicon.png">
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YoRHa // Archive System</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="projects.js" defer></script>
+    
+    <style>
+        :root {
+            --nier-bg: #1a1a17; 
+            --nier-text: #bab5a1;
+            --nier-accent: #4d4a40;
+            --nier-border: rgba(186, 181, 161, 0.2);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--nier-bg);
+            color: var(--nier-text);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            overflow-x: hidden;
+            text-transform: uppercase;
+        }
+
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.02) 50%);
+            background-size: 100% 4px; z-index: 100; pointer-events: none;
+        }
+
+        .system-nav {
+            display: flex;
+            background: rgba(255,255,255,0.03);
+            border-top: 1px solid var(--nier-text);
+            border-bottom: 1px solid var(--nier-text);
+            margin-top: 30px;
+            padding: 0 50px;
+            position: relative; z-index: 150;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            border-right: 1px solid var(--nier-border);
+            letter-spacing: 3px;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .tab:hover { background: rgba(255,255,255,0.1); }
+        .tab.active { background: var(--nier-text); color: var(--nier-bg); }
+
+        #main-ui { position: relative; z-index: 120; padding: 40px 50px; }
+
+        .header-block { border-bottom: 2px solid var(--nier-text); margin-bottom: 30px; padding-bottom: 10px; }
+        .page-title { font-size: 3.5rem; margin: 0; letter-spacing: 8px; font-weight: bold; }
+
+        .intel-backdrop {
+            background: var(--nier-text);
+            color: var(--nier-bg);
+            padding: 8px 20px;
+            display: inline-block;
+            margin-bottom: 2px;
+            font-size: 14px;
+        }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            border: 1px solid var(--nier-text);
+            background: rgba(255,255,255,0.02);
+            padding: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+        }
+
+        .grid-item:hover { background: var(--nier-text); color: var(--nier-bg); }
+        .grid-item img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+
+        .grid-item-title {
+            padding: 12px;
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 1.4;
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        #detail-view {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--nier-bg); z-index: 300;
+            display: none; opacity: 0; padding: 60px; box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .detail-layout { 
+            display: grid; 
+            grid-template-columns: 1fr 400px; 
+            gap: 50px; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            align-items: start;
+        }
+        
+        #detail-media { 
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .media-item { border: 1px solid var(--nier-text); background: #000; width: 100%; }
+
+        .video-wrapper { position: relative; padding-top: 56.25%; width: 100%; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        .detail-info { position: sticky; top: 0; }
+
+        .tag { border: 1px solid var(--nier-text); padding: 4px 10px; margin: 0 5px 5px 0; display: inline-block; font-size: 11px; }
+
+        .btn-escape {
+            background: none; border: 1px solid var(--nier-text); color: var(--nier-text);
+            padding: 10px 30px; cursor: pointer; margin-bottom: 40px;
+            font-weight: bold; letter-spacing: 2px;
+        }
+        .btn-escape:hover { background: var(--nier-text); color: var(--nier-bg); }
+        
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>IX Productions</h1>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+<div id="overlay"></div>
+<canvas id="bg-canvas"></canvas>
 
-  <main>
-    <!-- Intro Section -->
-    <section class="intro">
-      <h2>Welcome!</h2>
-      <p>I'm a 3D Lookdev artist and generalist specializing in materials, lighting, and rendering.</p>
+<nav class="system-nav">
+    <div class="tab active" onclick="nav('home')">HOME</div>
+    <div class="tab" onclick="nav('portfolio')">PORTFOLIO</div>
+    <div class="tab" onclick="nav('about')">INTEL (ABOUT)</div>
+</nav>
 
-      <!-- Background Vimeo Video -->
-      <div class="intro-video-bg">
-        <iframe
-          src="https://player.vimeo.com/video/1133223115?autoplay=1&muted=1&loop=1&background=1"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          allowfullscreen
-          title="Reel">
-        </iframe>
-        <div class="video-overlay"></div>
-      </div>
+<div id="main-ui">
+    <div class="header-block">
+        <h1 class="page-title" id="display-title">SYSTEM_ROOT</h1>
+    </div>
 
-      <!-- Foreground Video (normal, clear) -->
-      <div class="intro-video">
-        <iframe 
-          src="https://player.vimeo.com/video/1133223115?autoplay=1&muted=1&loop=1&background=1&controls=0&title=0&byline=0&portrait=0&transparent=0&playsinline=1" 
-          frameborder="0" 
-          allow="autoplay; encrypted-media" 
-          allowfullscreen 
-          title="Reel">
-        </iframe>
-      </div>
-    </section>
-
-    <!-- About Me Section -->
-    <section class="about-me">
-      <style>
-        .about-card {
-          max-width: 900px;
-          margin: 80px auto;
-          padding: 2rem 2.5rem;
-          border-radius: 20px;
-          background: rgba(255, 255, 255, 0.08);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-          color: #fff;
-          text-align: left;
-          line-height: 1.6;
-        }
-
-        .about-card h2 {
-          margin-top: 0;
-          margin-bottom: 1rem;
-          color: #c77dff;
-          font-weight: 600;
-          font-size: 2rem;
-          text-shadow: 0 0 8px rgba(200, 100, 255, 0.3);
-        }
-
-        .about-card p {
-          color: #e0e0e0;
-          font-size: 1.1rem;
-          letter-spacing: 0.4px;
-        }
-
-        .scroll-arrow {
-          display: block;
-          margin: 2rem auto 0 auto;
-          width: 50px;
-          height: auto;
-          cursor: pointer;
-          opacity: 0.5;
-          transition: transform 0.3s ease;
-        }
-
-        .scroll-arrow:hover {
-          transform: translateY(-5px);
-        }
-      </style>
-
-      <div class="about-card">
-        <h2>About Me</h2>
-        <p>
-          I'm IX Productions — a Lookdev & Technical Artist passionate about crafting believable materials, 
-          cinematic lighting, and expressive visuals. With 5+ years of freelance experience and 2+ years in 
-          professional roles, I specialize in Look Development, procedural workflows, and shader-based 
-          storytelling. This portfolio showcases my personal and professional work — from recent projects 
-          to creative experiments. Check out my other social media for behind-the-scenes insights, updates, and more.
+    <section id="home" class="section active">
+        <div class="intel-backdrop">UNIT_STATUS: OPERATIONAL</div>
+        <p style="max-width: 600px; line-height: 1.8; margin-top: 20px;">
+            Accessing decentralized encrypted storage. All visual logs and tactical data are formatted for high-contrast viewing.
         </p>
-      </div>
-
-      <img src="assets/images/arrow.png" alt="Scroll to Projects" class="scroll-arrow" id="scroll-arrow">
     </section>
-  </main>
 
-  <div id="image-zoom-overlay">
-    <img src="" alt="Zoomed Image">
-  </div> 
+    <section id="portfolio" class="section">
+        <div class="grid" id="project-grid"></div>
+    </section>
 
-  <footer>
-    <p>© 2025 IX Productions</p>
-  </footer>
+    <section id="about" class="section">
+        <div style="border-left: 8px solid var(--nier-text); padding-left: 25px;">
+            <div class="intel-backdrop">SPECIFICATIONS</div>
+            <p style="line-height: 2;">
+                DESIGNATION: DEVELOPER_UNIT<br>
+                CORE_SKILLS: 3D_MODELING // REAL-TIME RENDERING // WEB_TECH
+            </p>
+        </div>
+    </section>
+</div>
 
-  <script>
-    // Scroll arrow
-    const scrollArrow = document.getElementById("scroll-arrow");
-    scrollArrow.addEventListener("click", () => {
-      window.location.href = "projects.html";
-    });
-  </script>
+<div id="detail-view">
+    <button class="btn-escape" onclick="closeDetail()">[ ← ESCAPE_DATA ]</button>
+    <div class="detail-layout">
+        <div id="detail-media"></div>
+        <div class="detail-info">
+            <div id="detail-title" class="intel-backdrop" style="width:100%; font-size: 24px;"></div>
+            <p id="detail-desc" style="margin: 25px 0; line-height: 1.6; letter-spacing: 1px;"></p>
+            <div id="detail-tags" style="margin-bottom: 30px;"></div>
+            <a id="detail-link" href="#" target="_blank" class="intel-backdrop" style="text-decoration:none;">ACCESS_EXTERNAL_ARCHIVE</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function nav(id) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        document.getElementById(id).classList.add('active');
+        const titles = { home: 'SYSTEM_ROOT', portfolio: 'ARCHIVE_FILES', about: 'UNIT_INTEL' };
+        document.getElementById('display-title').innerText = titles[id];
+        gsap.from(".section.active", { opacity: 0, y: 10, duration: 0.3 });
+    }
+
+    function loadProjects() {
+        const container = document.getElementById('project-grid');
+        if(!window.PROJECT_DATA) return;
+        
+        container.innerHTML = ''; 
+        window.PROJECT_DATA.forEach((item, i) => {
+            const div = document.createElement('div');
+            div.className = 'grid-item';
+            const thumbUrl = Array.isArray(item.mediaUrl) ? item.mediaUrl[0] : item.mediaUrl;
+            div.innerHTML = `
+                <img src="${thumbUrl}" onerror="this.src='https://via.placeholder.com/400x225/1a1a17/bab5a1?text=DATA_MISSING'">
+                <div class="grid-item-title">[ 0${i+1} ] ${item.title}</div>
+            `;
+            div.onclick = () => openDetail(item);
+            container.appendChild(div);
+        });
+    }
+
+    function openDetail(data) {
+        document.getElementById('detail-title').innerText = data.title;
+        document.getElementById('detail-desc').innerText = data.description;
+        document.getElementById('detail-link').href = data.link;
+        document.getElementById('detail-tags').innerHTML = data.software.map(s => `<span class="tag">${s}</span>`).join('');
+        
+        const mediaCont = document.getElementById('detail-media');
+        mediaCont.innerHTML = ''; 
+
+        const mediaArray = Array.isArray(data.mediaUrl) ? data.mediaUrl : [data.mediaUrl];
+
+        mediaArray.forEach(url => {
+            const lowerUrl = url.toLowerCase();
+            const wrapper = document.createElement('div');
+            wrapper.className = 'media-item';
+
+            // 1. YouTube Identification via Regex (Fixes Error 153)
+            const ytMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+
+            if (ytMatch && ytMatch[1]) {
+                const videoId = ytMatch[1];
+                const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+                wrapper.innerHTML = `<div class="video-wrapper"><iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+            } 
+            // 2. Local Video Files
+            else if (lowerUrl.endsWith('.mp4') || lowerUrl.endsWith('.webm')) {
+                wrapper.innerHTML = `<video src="${url}" controls style="width:100%; display:block;"></video>`;
+            } 
+            // 3. Images (Default Fallback)
+            else {
+                wrapper.innerHTML = `<img src="${url}" style="width:100%; display:block;">`;
+            }
+            mediaCont.appendChild(wrapper);
+        });
+
+        gsap.to("#detail-view", { display: 'block', opacity: 1, duration: 0.4 });
+    }
+
+    function closeDetail() {
+        gsap.to("#detail-view", { opacity: 0, duration: 0.3, onComplete: () => {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('detail-media').innerHTML = '';
+            document.getElementById('detail-view').scrollTop = 0;
+        }});
+    }
+
+    window.onload = loadProjects;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
 </body>
 </html>

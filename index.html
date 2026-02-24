@@ -240,21 +240,19 @@
             const wrapper = document.createElement('div');
             wrapper.className = 'media-item';
 
-            // 1. YouTube Identification via Regex (Fixes Error 153)
+            // REGEX for YouTube ID extraction (Ensures no Error 153)
             const ytMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
 
             if (ytMatch && ytMatch[1]) {
                 const videoId = ytMatch[1];
                 const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
-                wrapper.innerHTML = `<div class="video-wrapper"><iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+                wrapper.innerHTML = `<div class=\"video-wrapper\"><iframe src=\"${embedUrl}\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen></iframe></div>`;
             } 
-            // 2. Local Video Files
             else if (lowerUrl.endsWith('.mp4') || lowerUrl.endsWith('.webm')) {
-                wrapper.innerHTML = `<video src="${url}" controls style="width:100%; display:block;"></video>`;
+                wrapper.innerHTML = `<video src=\"${url}\" controls style=\"width:100%; display:block;\"></video>`;
             } 
-            // 3. Images (Default Fallback)
             else {
-                wrapper.innerHTML = `<img src="${url}" style="width:100%; display:block;">`;
+                wrapper.innerHTML = `<img src=\"${url}\" style=\"width:100%; display:block;\">`;
             }
             mediaCont.appendChild(wrapper);
         });

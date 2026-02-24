@@ -10,7 +10,7 @@ window.PROJECT_DATA = [
             "https://cdna.artstation.com/p/assets/images/images/084/222/610/large/ix-productions-nvidia-overlay-du8x8qokyo.jpg?1737839463"
         ],
         software: ["Blender", "Substance 3D Painter", "DaVinci Resolve", "Nuke"],
-        description: "Cute little animation i wanted to do with a Katamari Prince model made, clay prince is cute. Made using Blender, Prince model made by me, lighting, set dressing, rendering, final image, all by me. Environment assets by Quixel Megascans",
+        description: "Fan-art animation featuring the Katamari Prince. Prince model, lighting, set dressing, and rendering all done by me. Environment assets via Quixel.",
         link: "https://www.artstation.com/artwork/yD94XQ"
     },
     {
@@ -20,40 +20,55 @@ window.PROJECT_DATA = [
         mediaUrl: [
             "https://cdnb.artstation.com/p/assets/images/images/084/224/265/large/ix-productions-outlander1.jpg?1737844281",
             "https://youtu.be/KDS-IAyqJlo",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/682/large/ix-productions-posterf1.jpg?1737845552",
             "https://cdn.artstation.com/p/video_sources/002/402/639/8mb.mp4",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/328/large/ix-productions-nvidia-overlay-ymcgrz1zoi.jpg?1737844450",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/364/large/ix-productions-nvidia-overlay-vzcllanj3o.jpg?1737844497",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/330/large/ix-productions-nvidia-overlay-qcff3vrjep.jpg?1737844455",
-            "https://cdnb.artstation.com/p/assets/images/images/084/224/337/large/ix-productions-nvidia-overlay-tfzqntjchu.jpg?1737844460",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/340/large/ix-productions-nvidia-overlay-dauijyaaud.jpg?1737844464",
-            "https://cdnb.artstation.com/p/assets/images/images/084/224/321/large/ix-productions-unrealeditor-dstooxxwhg.jpg?1737844439",
-            "https://cdnb.artstation.com/p/assets/images/images/084/224/325/large/ix-productions-unrealeditor-jqdbnwxuue.jpg?1737844443",
-            "https://cdn.artstation.com/p/video_sources/002/402/637/whatsapp-video-2024-05-02-at-9.mp4",
-            "https://cdnb.artstation.com/p/assets/images/images/084/224/361/large/ix-productions-nvidia-overlay-lqqcvliluf.jpg?1737844493",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/352/large/ix-productions-nvidia-overlay-oyyvjitud6.jpg?1737844479",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/356/large/ix-productions-nvidia-overlay-rjfb4wgwak.jpg?1737844484",
-            "https://cdnb.artstation.com/p/assets/images/images/084/224/349/large/ix-productions-nvidia-overlay-yjjjyfl6aa.jpg?1737844475",
-            "https://cdna.artstation.com/p/assets/images/images/084/224/344/large/ix-productions-nvidia-overlay-qv6v94krsj.jpg?1737844468",
-            "https://cdnb.artstation.com/p/assets/images/images/084/224/347/large/ix-productions-nvidia-overlay-hqio2p3nee.jpg?1737844471"
+            "https://cdna.artstation.com/p/assets/images/images/084/224/682/large/ix-productions-posterf1.jpg?1737845552"
         ],
         software: ["Unreal Engine 5", "Blender", "Substance 3D Painter", "Nuke", "DaVinci Resolve"],
-        description: "Short Film, made for a college project in 2024 in Unreal Engine | Animation, Texture & Material Work, Modelling, Character Design - Me / IX Productions Audio- Red Dead Redemption 2 / Rockstar Games Walk Cycle Animation- Mixamo Environment Assets - Quixel Retro Teddy bear 3D Scan - matousekfoto / sketchfab Realistic Starter VFX Pack Vol 2 - FX Cat UA.",
+        description: "Final Semester Short Film. Responsible for Animation, Texture & Material work, Modeling, and Character Design. Features a 3D scan study of a retro teddy bear.",
         link: "https://www.artstation.com/artwork/KDS-IAyqJlo"
     },
     {
         id: "03",
-        title: "LEGO_Cape_Weave_Blender_Geometry_Nodes_Prototype",
+        title: "LEGO_Cape_Weave_Prototype",
         type: "image", 
         mediaUrl: [
             "https://cdnb.artstation.com/p/assets/images/images/061/627/389/large/ix-productions-firefox-jmppscidaw.jpg?1681255538",
             "https://cdnb.artstation.com/p/assets/images/images/061/627/383/large/ix-productions-firefox-nvrnvt4v7w.jpg?1681255526",
-            "https://cdnb.artstation.com/p/assets/images/images/061/627/387/large/ix-productions-firefox-0xj00uuf9j.jpg?1681255531",
-            "https://cdna.artstation.com/p/assets/images/images/061/627/392/large/ix-productions-firefox-c37pbjejfs.jpg?1681255542",
-            "https://cdna.artstation.com/p/assets/images/images/061/627/396/large/ix-productions-image.jpg?1681255548"
+            "https://cdnb.artstation.com/p/assets/images/images/061/627/387/large/ix-productions-firefox-0xj00uuf9j.jpg?1681255531"
         ],
         software: ["Blender"],
-        description: "Procedural knitting system using geometry nodes and UV mapping.",
+        description: "A procedural knitting system built in Geometry Nodes that uses mesh UVs to map patterns onto complex shapes.",
         link: "https://www.artstation.com/artwork/Xg9V03"
+    },
+    {
+        id: "04",
+        title: "31_Minutos_Set_Style_Project",
+        type: "mixed",
+        mediaUrl: [
+            "https://cdnb.artstation.com/p/assets/images/images/094/396/195/large/ix-productions-still-2025-12-09-142308-3-1-1.webp?1765308196",
+            "https://cdn.artstation.com/p/video_sources/002/974/211/8mb-video-pcg-ahswhti6.mp4",
+            "https://cdn.artstation.com/p/video_sources/002/974/212/output.mp4",
+            "https://cdnb.artstation.com/p/assets/images/images/094/396/301/large/ix-productions-frame4.webp?1765308417"
+        ],
+        software: ["Blender", "Substance 3D Painter", "Nuke", "DaVinci Resolve"],
+        description: "Environment study recreating the 31 Minutos set in a crafty, cardboard-oriented style. Focused on surfacing and lighting experiments.",
+        link: "https://www.artstation.com/artwork/yD94XQ"
+    },
+    {
+        id: "05",
+        title: "Upshot_Affairs_Lighting_Work",
+        type: "mixed",
+        mediaUrl: [
+            "https://cdnb.artstation.com/p/assets/images/images/084/324/327/large/ix-productions-x-jic0klwhglq-1920x802-h264-00-07-59-04-still003.jpg?1738092298",
+            "https://youtu.be/JiC0kLWhglQ",
+            "https://cdn.artstation.com/p/video_sources/002/407/807/clip1.mp4",
+            "https://cdn.artstation.com/p/video_sources/002/407/813/clip3.mp4",
+            "https://cdn.artstation.com/p/video_sources/002/407/849/clip4.mp4",
+            "https://cdn.artstation.com/p/video_sources/002/407/810/clip2.mp4",
+            "https://cdnb.artstation.com/p/assets/images/images/084/324/377/large/ix-productions-x-jic0klwhglq-1920x802-h264-00-07-13-13-still001.jpg?1738092355"
+        ],
+        software: ["Blender", "Mecabricks"],
+        description: "Lighting and facial rigging for the indie film 'Upshot Affairs' by Owenator Productions (2021-2022). Responsible for a significant chunk of shots and character setup.",
+        link: "https://www.artstation.com/artwork/x-jic0klwhglq"
     }
 ];
